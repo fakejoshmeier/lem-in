@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   aux.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/21 19:49:13 by jmeier            #+#    #+#             */
+/*   Updated: 2018/03/21 19:49:19 by jmeier           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <lemin.h>
 
 int		count_words(char *str)
@@ -13,11 +25,11 @@ int		count_words(char *str)
 	return (i);
 }
 
-int		validate(char *str, char check)
+int		validate(char *str, int check)
 {
 	char	**tmp;
 
-	if (check == 'r')
+	if (check == 1)
 	{
 		tmp = ft_strsplit(str, ' ');
 		if (allnum(tmp[1]) && allnum(tmp[2]))
@@ -27,10 +39,10 @@ int		validate(char *str, char check)
 		}
 		ft_freearr(tmp);
 	}
-	else if (check == 'l')
+	else if (check == 2)
 	{
 		tmp = ft_strsplit(str, '-');
-		if (allnum(tmp[0]) && allnum(tmp[1]) && count_words(str) == 2)
+		if (count_words(str) == 2)
 		{
 			ft_freearr(tmp);
 			return (1);
@@ -38,6 +50,17 @@ int		validate(char *str, char check)
 		ft_freearr(tmp);
 	}
 	return (0);
+}
+
+int		cycle_check(char *str, t_node **nodes)
+{
+	char	**tmp;
+
+	tmp = ft_strsplit(str, ' ');
+	if (!nodes)
+		return (1);
+	ft_iternode(*nodes, tmp[0]);
+	return (1);
 }
 
 int		allnum(char *str)
