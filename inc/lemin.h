@@ -18,6 +18,8 @@
 
 /*
 ** x and y are for just in case I ever decide to do a visualizer.
+** Arrowhead is number of links!  I'm just being cute about it.  Can't have
+** something called links without ALLOWHEDDO KAKUNIN
 */
 
 typedef struct		s_node
@@ -30,6 +32,16 @@ typedef struct		s_node
 	struct t_node	*next;
 	struct s_room	**links;
 }					t_node;
+
+typedef struct		s_link
+{
+	int				linklen;
+	int				dashpos;
+	char			*room1;
+	char			*room2;
+	t_room			*room1ad;
+	t_room			*room2ad;
+}					t_link;
 
 typedef struct		s_lemin
 {
