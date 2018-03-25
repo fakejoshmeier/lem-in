@@ -82,5 +82,6 @@ int		room_check(char *str, t_lemin *lem)
 	dup_checkr(tmp[0], lem);
 	add_room(tmp, lem);
 	ft_freearr(tmp);
+	ft_putendl(str);
 	return (1);
 }

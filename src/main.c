@@ -20,9 +20,27 @@ void	ft_error(char *str)
 
 void	begin_parse(t_lemin *lem)
 {
-	ants(lem);
-	rooms(lem);
-	links(lem);
+	char	**str;
+	int		pos;
+
+	pos = 0;
+	while (get_next_line(0, &str))
+	{
+		if (str[0] == '#' && str[1] != '#')
+			ft_putendl(str);
+		else if (pos == 0)
+			if (ants(lem, str))
+			{
+				pos += 1;
+				continue ;
+			}
+		else if (pos == 1)
+			if (!rooms(lem, str))
+				pos += 1;
+		else if (pos == 2)
+			links(lem);
+		free(str);
+	}
 	write(1, "\n", 1);
 }
 
