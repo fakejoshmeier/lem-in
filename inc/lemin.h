@@ -25,51 +25,79 @@
 typedef struct		s_node
 {
 	char			*name;
-	bool			check;
+	bool			visit;
 	int				arrowhead;
 	int				x;
 	int				y;
-	struct t_node	*next;
-	struct s_room	**links;
+	struct s_node	*next;
+	struct s_node	**links;
 }					t_node;
+
+/*
+** This struct is purely for the purposes of parsing.  I temporarily make
+** pointers to the nodes that have the same names as the ones given in the
+** link, then write that information down into the node itself.  Afterwards,
+** I free the struct.
+*/
 
 typedef struct		s_link
 {
-	int				linklen;
-	int				dashpos;
-	char			*room1;
-	char			*room2;
-	t_room			*room1ad;
-	t_room			*room2ad;
+	char			*name0;
+	char			*name1;
+	struct s_node	*node0;
+	struct s_node	*node1;
 }					t_link;
 
 typedef struct		s_lemin
 {
 	int				ants;
-	int				ants_in_start;
+	int				remain;
 	int				s_flag;
 	int				e_flag;
 	int				node_amt;
-	struct t_node	*start;
-	struct t_node	*end;
-	struct t_node	**nodes
+	struct s_node	*start;
+	struct s_node	*end;
+	struct s_node	**nodes;
 }					t_lemin;
 
 
-int					main(int ac, char *av[])
-void				begin_parse(t_lemin *lem)
-void				ft_error(char *str)
+int					main(int ac, char *av[]);
+void				ft_error(char *str);
 
-void				ants(t_lemin *lem)
-void				rooms(t_lemin *lem)
+/*
+** parse.c
+*/
 
+void				begin_parse(t_lemin *lem, int pos);
+int					ants(t_lemin *lem, char *str);
+int					rooms(t_lemin *lem, char *str);
+void				links(t_lemin *lem, char *str);
 
-int					room_check(char *str, t_lemin *lem)
-void				dup_checkr(char *name, t_lemin *lem)
-void				add_room(char **stuff, t_lemin *lem)
-void				affix_room(t_lemin *lem, t_node *node, int node_amt)
+/*
+** rooms.c
+*/
 
-int					count_words(char *str)
-int					allnum(char *str)
+int					room_check(char *str, t_lemin *lem);
+void				dup_checkr(char *name, t_lemin *lem);
+void				add_room(char **stuff, t_lemin *lem);
+void				affix_room(t_lemin *lem, t_node *new_node, int node_amt);
+void				command_parse(char *str, t_lemin *lem);
+
+/*
+** links.c
+*/
+
+void				maaka_ni_setto(char *str, t_lemin *lem);
+void				saaketto_konbain(t_node *uke, t_node *seme, int size);
+void				check_links(char *name, char *link_to, t_node *address, \
+					t_lemin *lem);
+int					dup_checkrl(t_node *node, char *link_name);
+
+/*
+** aux.c
+*/
+
+int					count_words(char *str);
+int					allnum(char *str);
 
 #endif

@@ -1,6 +1,6 @@
 NAME = lemin
 
-FUNC = 
+FUNC = main aux links parse rooms
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))
@@ -41,7 +41,6 @@ force:
 clean:
 	@echo "ザ・ワールド！"
 	@/bin/rm -f $(O_SRC)
-	@make clean -C mlx
 
 fclean: clean
 	@/bin/rm -f $(NAME)
