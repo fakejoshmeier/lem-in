@@ -29,5 +29,7 @@ int		main(int ac, char *av[])
 	lem = ft_memalloc(sizeof(t_lemin));
 	begin_parse(lem, 0);
 	write(1, "\n", 1);
+	while (1)
+		;
 	return (0);
 }

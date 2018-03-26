@@ -73,6 +73,7 @@ void				begin_parse(t_lemin *lem, int pos);
 int					ants(t_lemin *lem, char *str);
 int					rooms(t_lemin *lem, char *str);
 void				links(t_lemin *lem, char *str);
+void				comments(char *str);
 
 /*
 ** rooms.c
@@ -88,10 +89,9 @@ void				command_parse(char *str, t_lemin *lem);
 ** links.c
 */
 
-void				maaka_ni_setto(char *str, t_lemin *lem);
+void				arrowhead_kakunin(char *str, t_lemin *lem);
+void				maaka_ni_setto(t_link *link, t_lemin *lem);
 void				saaketto_konbain(t_node *uke, t_node *seme, int size);
-void				check_links(char *name, char *link_to, t_node *address, \
-					t_lemin *lem);
 int					dup_checkrl(t_node *node, char *link_name);
 
 /*

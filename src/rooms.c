@@ -70,13 +70,9 @@ void	add_room(char **stuff, t_lemin *lem)
 	int		i;
 
 	i = -1;
-	if (!(node = ft_memalloc(sizeof(node))))
+	if (!(node = (t_node *)ft_memalloc(sizeof(t_node))))
 		ft_error("Unable to allocate memory!");
-	// if (!(node->name = ft_memalloc(sizeof(char) * ft_strlen(stuff[0]))))
-	// 	ft_error("Unable to allocate memory!");
-	// while (stuff[0][++i] != '\0')
-	// 	node->name[i] = stuff[0][i];
-	node->name = stuff[0];
+	node->name = ft_strdup(stuff[0]);
 	node->x = ft_atoi(stuff[2]);
 	node->y = ft_atoi(stuff[1]);
 	if (lem->s_flag == 1)
@@ -104,6 +100,6 @@ int		room_check(char *str, t_lemin *lem)
 		ft_error("Given coordinates must be numerals.");
 	dup_checkr(tmp[0], lem);
 	add_room(tmp, lem);
-//	ft_freearr(tmp);
+	ft_freearr(tmp);
 	return (1);
 }
