@@ -12,23 +12,42 @@
 
 #include <lemin.h>
 
+// int		count_words(char *str)
+// {
+// 	int		count;
+// 	int		i;
+// 	char	c;
+
+// 	c = ' ';
+// 	i = 0;
+// 	count = 0;
+// 	while (str[i])
+// 	{
+// 		while (str[i] == c)
+// 			++i;
+// 		if (str[i] != c && str[i] != '\0')
+// 			++count;
+// 		while (str[i] != c && str[i] != '\0')
+// 			++i;
+// 	}
+// 	return (count);
+// }
+
 int		count_words(char *str)
 {
+	char	c;
 	int		count;
 	int		i;
-	char	c;
 
 	c = ' ';
-	i = 0;
 	count = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i] != '\0')
 	{
-		while (str[i] == c)
-			i++;
-		if (str[i] != c && str[i] != '\0')
-			count++;
-		while (str[i] != c && str[i] != '\0')
-			i++;
+		if (str[i] != c && i == 0)
+			++count;
+		else if (str[i] != c && str[i - 1] == c)
+			++count;
 	}
 	return (count);
 }

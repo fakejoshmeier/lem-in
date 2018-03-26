@@ -34,14 +34,17 @@ void	check_links(char *name, char *link_to, t_node *address, t_lemin *lem)
 	int		i;
 
 	i = -1;
+	printf("Checking to see if node %s exists\n", name);
 	while (++i < lem->node_amt)
 	{
-		printf("%s\n", lem->nodes[i]->name);
+		printf("Existing node name: %s %i\n ", lem->nodes[i]->name, (ft_strcmp(lem->nodes[i]->name, name)));
 		if (!(ft_strcmp(lem->nodes[i]->name, name)))
 		{
 			!dup_checkrl(lem->nodes[i], link_to) ? 0 : ft_error("These two \
 			rooms are already linked.");
 			address = lem->nodes[i];
+			printf("FOUND!\n");
+			return;
 		}
 	}
 	ft_error("Could not find matching rooms!");
@@ -55,6 +58,7 @@ void	saaketto_konbain(t_node *uke, t_node *seme, int size)
 	i = -1;
 	if (!(tmp = ft_memalloc((sizeof(t_node) * size + 1))))
 		ft_error("Failed to allocate memory!");
+	printf("confirmed\n");
 	while (++i < size)
 		tmp[i] = uke->links[i];
 	tmp[i] = seme;
@@ -78,6 +82,7 @@ void	maaka_ni_setto(char *str, t_lemin *lem)
 		ft_error("Failed to allocate memory!");
 	link->name0 = tmp[0];
 	link->name1 = tmp[1];
+	printf("name1: %s name2: %s\n", link->name0, link->name1);
 	check_links(link->name0, link->name1, link->node0, lem);
 	check_links(link->name1, link->name0, link->node1, lem);
 	saaketto_konbain(link->node0, link->node1, link->node0->arrowhead);

@@ -12,6 +12,13 @@
 
 #include <lemin.h>
 
+void	check(t_node **nodes, int size)
+{
+	int i = -1;
+	while (++i < size)
+		printf("name:%s\n", nodes[i]->name);
+}
+
 int		ants(t_lemin *lem, char *str)
 {
 	str[0] == '#' && str[1] == '#' ? ft_error("Commands only apply to rooms.")
@@ -31,6 +38,7 @@ int		rooms(t_lemin *lem, char *str)
 		command_parse(str, lem);
 	else if (!room_check(str, lem))
 	{
+		// check(lem->nodes, lem->node_amt);
 		lem->node_amt ? 0 : ft_error("Must provide valid rooms!");
 		lem->start ? 0 : ft_error("Starting room must follow the ##start \
 	 	command and must exist.");
@@ -75,8 +83,10 @@ void	begin_parse(t_lemin *lem, int pos)
 				pos += 1;
 		}
 		if (pos == 2)
+		{
+			check(lem->nodes, lem->node_amt);
 			links(lem, str);
+		}
 		free(str);
 	}
-	write(1, "\n", 1);
 }

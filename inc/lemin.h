@@ -15,6 +15,7 @@
 # include <ft_printf.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 /*
 ** x and y are for just in case I ever decide to do a visualizer.

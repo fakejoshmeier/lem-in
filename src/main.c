@@ -15,6 +15,7 @@
 void	ft_error(char *str)
 {
 	ft_putendl(str);
+	while (1);
 	exit(1);
 }
 
@@ -23,10 +24,10 @@ int		main(int ac, char *av[])
 	t_lemin	*lem;
 
 	(void)av;
-	(void)ac;
-//	if (ac)
-//		ft_error("USAGE: ./lem-in < example.txt");
+	if (ac < 0)
+		ft_error("USAGE: ./lem-in < example.txt");
 	lem = ft_memalloc(sizeof(t_lemin));
 	begin_parse(lem, 0);
+	write(1, "\n", 1);
 	return (0);
 }
