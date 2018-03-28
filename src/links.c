@@ -29,7 +29,7 @@ int		dup_checkrl(t_node *node, char *link_name)
 	return (0);
 }
 
-void	saaketto_konbain(t_node *uke, t_node *seme, int size)
+void	saakitto_konbain(t_node *uke, t_node *seme, int size)
 {
 	t_node	**tmp;
 	int		i;
@@ -45,7 +45,7 @@ void	saaketto_konbain(t_node *uke, t_node *seme, int size)
 	uke->links = tmp;
 }
 
-void	maaka_ni_setto(t_link *link, t_lemin *lem)
+void	maakaa_ni_setto(t_link *link, t_lemin *lem)
 {
 	int		i;
 
@@ -75,24 +75,17 @@ void	arrowhead_kakunin(char *str, t_lemin *lem)
 {
 	t_link	*link;
 	char	**tmp;
-	int		i;
 
-	i = -1;
-	tmp = ft_strsplit(str, '-');
-	while (tmp[++i])
-		;
-	if (i != 2)
-	{
-		ft_freearr(tmp);
+	if (ft_count_words(str, '-') != 2)
 		ft_error("Incorrect link format. [NODE1]-[NODE2]");
-	}
 	if (!(link = (t_link *)ft_memalloc(sizeof(t_link))))
 		ft_error("Failed to allocate memory!");
+	tmp = ft_strsplit(str, '-');
 	link->name0 = tmp[0];
 	link->name1 = tmp[1];
-	maaka_ni_setto(link, lem);
-	saaketto_konbain(link->node0, link->node1, link->node0->arrowhead);
-	saaketto_konbain(link->node1, link->node0, link->node1->arrowhead);
+	maakaa_ni_setto(link, lem);
+	saakitto_konbain(link->node0, link->node1, link->node0->arrowhead);
+	saakitto_konbain(link->node1, link->node0, link->node1->arrowhead);
 	++link->node0->arrowhead;
 	++link->node1->arrowhead;
 	ft_freearr(tmp);

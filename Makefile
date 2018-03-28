@@ -1,6 +1,6 @@
-NAME = lemin
+NAME = lem-in
 
-FUNC = main aux links parse rooms
+FUNC = main ants rooms links parse dijkstra aux
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))

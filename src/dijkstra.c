@@ -1,0 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dijkstra.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/27 18:59:53 by jmeier            #+#    #+#             */
+/*   Updated: 2018/03/27 18:59:56 by jmeier           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <lemin.h>
+
+/*
+** Dijkstra's might be overkill considering how each edge is weighted at one
+** since the grading sheet doesn't take distance into account :/
+** I saved the values for rows and columns and so theoretically could add
+** weight as a parameter, but I'm not allowed to use math.h's sqrt function.
+** Oh dunk, the Babylonian method exists, so I have a relatively easy way to
+** make distance...UUUUGH, I guess I'll do it?  It technically becomes a more
+** complete implementation of the project since it really does find the
+** shortest possible path.  Oh shit, make this a flag.  Default weight as 1,
+** but if you want to get FANCY, pop in that -D ( ͡° ͜ʖ ͡°) and I'll use
+** distance.
+*/
+
+/*
+** Depending on the dist flag, if marked as true, then distance will be
+** given in the distance formula.  Else, I'll just make distance equal to 1
+*/
+
+int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
+{
+	float	dist;
+
+	dist = flag == true ? distance(curr, next) : 1;
+	if (next->start)
+		return (0);
+	if (!next->path)
+	{
+		next->weight = curr->weight + dist;
+		return (1);
+	}
+	if (next->path && curr->weight + dist < next->weight)
+	{
+		next->weight = curr->weight + dist;
+		return (1);
+	}
+	return (0);
+}
+
+void	dijkstra(int i, int step, t_node *node, t_lemin *lem)
+{
+	node->visit = true;
+	while (++i < node->arrowhead)
+	{
+		if (step == 0)
+		{
+			if (youre_gonna_carry_that_weight(node, node->links[i], lem->dist))
+				node->links[i]->path = node;
+		}
+		else
+		{
+			if (!node->end && !node->links[i]->start && !node->links[i]->visit)
+				dijkstra(-1, 0, node->links[i], lem);
+		}
+		if (i == node->arrowhead - 1)
+		{
+			++step;
+			i = -1;
+		}
+	}
+	if (!lem->end->path)
+	{
+		free(lem);
+		ft_error("No path between start and end found.");
+	}
+}

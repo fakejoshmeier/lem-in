@@ -67,33 +67,36 @@ void	affix_room(t_lemin *lem, t_node *new_node, int node_amt)
 void	add_room(char **stuff, t_lemin *lem)
 {
 	t_node	*node;
-	int		i;
 
-	i = -1;
 	if (!(node = (t_node *)ft_memalloc(sizeof(t_node))))
 		ft_error("Unable to allocate memory!");
 	node->name = ft_strdup(stuff[0]);
-	node->x = ft_atoi(stuff[2]);
-	node->y = ft_atoi(stuff[1]);
+	node->row = (double)ft_atoi(stuff[1]);
+	node->col = (double)ft_atoi(stuff[2]);
+	node->visit = false;
+	node->weight = INFINITY;
 	if (lem->s_flag == 1)
 	{
 		lem->start = node;
 		lem->s_flag = 2;
+		node->start = true;
+		node->weight = 0;
 	}
 	if (lem->e_flag == 1)
 	{
 		lem->end = node;
+		node->end = true;
 		lem->e_flag = 2;
 	}
 	affix_room(lem, node, lem->node_amt);
-	lem->node_amt++;
+	++lem->node_amt;
 }
 
 int		room_check(char *str, t_lemin *lem)
 {
 	char	**tmp;
 
-	if (count_words(str) != 3)
+	if (ft_count_words(str, ' ') != 3)
 		return (0);
 	tmp = ft_strsplit(str, ' ');
 	if (!allnum(tmp[1]) || !allnum(tmp[2]))

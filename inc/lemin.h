@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <math.h>
 
 /*
 ** x and y are for just in case I ever decide to do a visualizer.
@@ -27,10 +28,14 @@ typedef struct		s_node
 {
 	char			*name;
 	bool			visit;
+	bool			start;
+	bool			end;
 	int				arrowhead;
-	int				x;
-	int				y;
-	struct s_node	*next;
+	int				ant;
+	double			weight;
+	double			row;
+	double			col;
+	struct s_node	*path;
 	struct s_node	**links;
 }					t_node;
 
@@ -56,6 +61,7 @@ typedef struct		s_lemin
 	int				s_flag;
 	int				e_flag;
 	int				node_amt;
+	bool			dist;
 	struct s_node	*start;
 	struct s_node	*end;
 	struct s_node	**nodes;
@@ -76,6 +82,22 @@ void				links(t_lemin *lem, char *str);
 void				comments(char *str);
 
 /*
+** dijkstra.c
+*/
+
+void				dijkstra(int i, int step, t_node *node, t_lemin *lem);
+int					youre_gonna_carry_that_weight(t_node *curr, t_node *next, \
+					bool flag);
+
+/*
+** ants.c
+*/
+
+void				the_ants(t_lemin *lem);
+void				go_marching_one_by_one(int ants_in_end, t_lemin *lem);
+void				hurrah_hurrah(int ants_in_end, t_node *tmp, t_lemin *lem);
+
+/*
 ** rooms.c
 */
 
@@ -90,15 +112,18 @@ void				command_parse(char *str, t_lemin *lem);
 */
 
 void				arrowhead_kakunin(char *str, t_lemin *lem);
-void				maaka_ni_setto(t_link *link, t_lemin *lem);
-void				saaketto_konbain(t_node *uke, t_node *seme, int size);
+void				maakaa_ni_setto(t_link *link, t_lemin *lem);
+void				saakitto_konbain(t_node *uke, t_node *seme, int size);
 int					dup_checkrl(t_node *node, char *link_name);
 
 /*
 ** aux.c
 */
 
-int					count_words(char *str);
+int					ignore(char c);
 int					allnum(char *str);
+void				free_lots(void *ptr1, void *ptr2);
+double				sqroot(double square);
+double				distance(t_node *a, t_node *b);
 
 #endif

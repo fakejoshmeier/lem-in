@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <lemin.h>
+#define USAGE "USAGE: ./lem-in [-D] < example.txt\n-D : Implement weight."
 
 void	ft_error(char *str)
 {
@@ -23,13 +24,25 @@ int		main(int ac, char *av[])
 {
 	t_lemin	*lem;
 
-	(void)av;
-	if (ac < 0)
-		ft_error("USAGE: ./lem-in < example.txt");
-	lem = ft_memalloc(sizeof(t_lemin));
+	lem = (t_lemin *)ft_memalloc(sizeof(t_lemin));
+	if (ac < 1 || ac > 2)
+		ft_error(USAGE);
+	if (ac > 1)
+	{
+		while (ac-- > 1)
+		{
+			if (!ft_strcmp(av[ac], "-D"))
+				lem->dist = true;
+			else
+			{
+				free(lem);
+				ft_error(USAGE);
+			}
+		}
+	}
 	begin_parse(lem, 0);
-	write(1, "\n", 1);
-	while (1)
-		;
+	dijkstra(-1, 0, lem->start, lem);
+	the_ants(lem);
+	free(lem);
 	return (0);
 }

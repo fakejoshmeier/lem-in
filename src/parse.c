@@ -20,13 +20,15 @@ void	comments(char *str)
 
 int		ants(t_lemin *lem, char *str)
 {
-	str[0] == '#' && str[1] == '#' ? ft_error("Commands only apply to rooms.")
-	: 0;
-	count_words(str) == 1 ? 0 : ft_error("Ants must be one number.");
-	allnum(str) ? 0 : ft_error("Number of ants must be in numeric form.");
+	if (str[0] == '#' && str[1] == '#')
+		ft_error("Commands only apply to rooms.");
+	if (ft_count_words(str, ' ') != 1)
+		ft_error("Ants must be one number.");
+	if (!allnum(str))
+		ft_error("Number of ants must be in numeric form.");
+	if (!ft_atoi(str))
+		ft_error("Must have at least 1 ant.  Otherwise, what's the point?");
 	lem->ants = ft_atoi(str);
-	lem->ants > 0 ? 0 : ft_error("Must have at least 1 ant.  Otherwise, what's \
-	the point?");
 	ft_putendl(str);
 	free(str);
 	return (1);
@@ -38,11 +40,21 @@ int		rooms(t_lemin *lem, char *str)
 		command_parse(str, lem);
 	else if (!room_check(str, lem))
 	{
-		lem->node_amt ? 0 : ft_error("Must provide valid rooms!");
-		lem->start ? 0 : ft_error("Starting room must follow the ##start \
-			command and must exist.");
-		lem->end ? 0 : ft_error("Ending room must follow the ##end \
-			command and must exist.");
+		if (!lem->node_amt)
+		{
+			free_lots(str, lem);
+			ft_error("Must provide valid rooms!");
+		}
+		if (!lem->start)
+		{
+			free_lots(str, lem);
+			ft_error("Starting room must follow ##start and must exist.");
+		}
+		if (!lem->end)
+		{
+			free_lots(str, lem);
+			ft_error("Ending room must follow ##end and must exist.");
+		}
 		return (0);
 	}
 	ft_putendl(str);
@@ -51,10 +63,16 @@ int		rooms(t_lemin *lem, char *str)
 
 void	links(t_lemin *lem, char *str)
 {
-	str[0] == '#' && str[1] == '#' ? ft_error("Commands only apply to rooms.")
-	: 0;
-	if ((count_words(str) != 1) || !(ft_strchr(str, '-')))
+	if (str[0] == '#' && str[1] == '#')
+	{
+		free_lots(str, lem);
+		ft_error("Commands only apply to rooms.");
+	}
+	if ((ft_count_words(str, ' ') != 1) || !(ft_strchr(str, '-')))
+	{
+		free_lots(str, lem);
 		ft_error("Invalid link format.");
+	}
 	arrowhead_kakunin(str, lem);
 	ft_putendl(str);
 }
@@ -85,4 +103,5 @@ void	begin_parse(t_lemin *lem, int pos)
 			links(lem, str);
 		free(str);
 	}
+	write(1, "\n", 1);
 }
