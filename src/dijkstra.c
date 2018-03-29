@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 18:59:53 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/27 18:59:56 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/03/29 11:17:25 by josh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
 void	dijkstra(int i, int step, t_node *node, t_lemin *lem)
 {
 	node->visit = true;
-	while (++i < node->arrowhead)
+	while (++i < node->arrowhead && step < 2)
 	{
 		if (step == 0)
 		{
