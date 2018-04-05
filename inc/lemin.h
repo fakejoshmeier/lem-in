@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemin.h                                           :+:      :+:    :+:   */
+/*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 21:02:52 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/12 21:02:55 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/03/29 12:35:08 by josh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ int					youre_gonna_carry_that_weight(t_node *curr, t_node *next, \
 */
 
 void				the_ants(t_lemin *lem);
-void				go_marching_one_by_one(int ants_in_end, t_lemin *lem);
-void				hurrah_hurrah(int ants_in_end, t_node *tmp, t_lemin *lem);
+void				go_marching_one_by_one(unsigned int ants_in_end, \
+					t_lemin *lem);
+void				hurrah_hurrah(unsigned int ants_in_end, t_node *tmp, \
+					t_lemin *lem);
 
 /*
 ** rooms.c

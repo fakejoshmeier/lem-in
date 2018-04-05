@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 21:23:24 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/26 07:24:14 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/03/29 12:35:28 by josh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int		main(int ac, char *av[])
 	}
 	begin_parse(lem, 0);
 	dijkstra(-1, 0, lem->start, lem);
-	the_ants(lem);
+
+		the_ants(lem);
 	free(lem);
 	return (0);
 }

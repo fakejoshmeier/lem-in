@@ -6,13 +6,13 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:56:31 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/28 13:56:33 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/03/29 12:34:16 by josh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
 
-void	hurrah_hurrah(int ants_in_end, t_node *tmp, t_lemin *lem)
+void	hurrah_hurrah(unsigned int ants_in_end, t_node *tmp, t_lemin *lem)
 {
 	tmp->path->ant = tmp->ant + 1;
 	if ((tmp->path->ant - 1) != ants_in_end)
@@ -21,16 +21,18 @@ void	hurrah_hurrah(int ants_in_end, t_node *tmp, t_lemin *lem)
 	--lem->remain;
 }
 
-void	go_marching_one_by_one(int ants_in_end, t_lemin *lem)
+void	go_marching_one_by_one(unsigned int ants_in_end, t_lemin *lem)
 {
 	t_node		*tmp;
 
-	tmp = lem->end;
+
 	while (ants_in_end < lem->ants)
 	{
+		tmp = lem->end;
 		while (tmp->path)
 		{
-			tmp->end && tmp->ant ? ++ants_in_end : 0;
+			if (tmp->end && tmp->ant)
+				++ants_in_end;
 			if ((tmp->ant = tmp->path->ant))
 			{
 				tmp->ant - 1 != ants_in_end ? write(1, " ", 1) : 0;
