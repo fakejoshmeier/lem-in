@@ -31,7 +31,7 @@ typedef struct		s_node
 	bool			start;
 	bool			end;
 	int				arrowhead;
-	int				ant;
+	int				ant_in_node;
 	double			weight;
 	double			row;
 	double			col;
@@ -93,10 +93,8 @@ int					youre_gonna_carry_that_weight(t_node *curr, t_node *next, \
 ** ants.c
 */
 
-void				the_ants(t_lemin *lem);
-void				go_marching_one_by_one(unsigned int ants_in_end, \
-					t_lemin *lem);
-void				hurrah_hurrah(unsigned int ants_in_end, t_node *tmp, \
+void				the_ants_go_marching(t_lemin *lem);
+void				one_small_step_for_an_ant(int finished, t_node *second, \
 					t_lemin *lem);
 
 /*

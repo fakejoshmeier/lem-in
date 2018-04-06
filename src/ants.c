@@ -12,44 +12,43 @@
 
 #include <lemin.h>
 
-void	hurrah_hurrah(unsigned int ants_in_end, t_node *tmp, t_lemin *lem)
+/*
+** So it looks as if the ants work on a sort of queue?  I run through the things
+** in what looks to be a while loop.  So while
+*/
+
+void	one_small_step_for_an_ant(int finished, t_node *second, t_lemin *lem)
 {
-	tmp->path->ant = tmp->ant + 1;
-	if ((tmp->path->ant - 1) != ants_in_end)
-		write(1, " ", 1);
-	ft_printf("L%d-%s", tmp->path->ant, tmp->path->name);
-	--lem->remain;
+	second->path->ant_in_node = second->ant_in_node + 1;
+	second->ant_in_node - 1 != finished ? write(1, " ", 1) : 0;
+	ft_printf("L%i-%s", second->path->ant_in_node, second->path->name);
+	--lem->ants;
 }
 
-void	go_marching_one_by_one(unsigned int ants_in_end, t_lemin *lem)
+void	the_ants_go_marching(t_lemin *lem)
 {
-	t_node		*tmp;
+	t_node	*tmp;
+	int		finished;
 
-
-	while (ants_in_end < lem->ants)
+	finished = 0;
+	while (finished < lem->ants)
 	{
 		tmp = lem->end;
 		while (tmp->path)
 		{
-			if (tmp->end && tmp->ant)
-				++ants_in_end;
-			if ((tmp->ant = tmp->path->ant))
+			tmp->ant_in_node = tmp->path->ant_in_node;
+			if (tmp->end)
+				++finished;
+			if (tmp->ant_in_node)
 			{
-				tmp->ant - 1 != ants_in_end ? write(1, " ", 1) : 0;
-				ft_printf("L%i-%s", tmp->ant, tmp->name);
+				tmp->ant_in_node - 1 != finished ? write(1, " ", 1) : 0;
+				ft_printf("L%i-%s", tmp->ant_in_node, tmp->name);
 			}
-			if (tmp->path->start && !lem->remain)
-				tmp->path->ant = 0;
-			if (tmp->path->start && lem->remain > 0)
-				hurrah_hurrah(ants_in_end, tmp, lem);
+			if (tmp->path->start)
+				lem->remain ? (tmp->path->ant_in_node = 0) : \
+				one_small_step_for_an_ant(finished, tmp, lem);
 			tmp = tmp->path;
 		}
 		write(1, "\n", 1);
 	}
-}
-
-void	the_ants(t_lemin *lem)
-{
-	lem->remain = lem->ants;
-	go_marching_one_by_one(0, lem);
 }

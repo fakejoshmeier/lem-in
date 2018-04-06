@@ -25,8 +25,7 @@ int		main(int ac, char *av[])
 	t_lemin	*lem;
 
 	lem = (t_lemin *)ft_memalloc(sizeof(t_lemin));
-	if (ac < 1 || ac > 2)
-		ft_error(USAGE);
+	(ac < 1 || ac > 2) ? ft_error(USAGE) : 0;
 	if (ac > 1)
 	{
 		while (ac-- > 1)
@@ -42,8 +41,7 @@ int		main(int ac, char *av[])
 	}
 	begin_parse(lem, 0);
 	dijkstra(-1, 0, lem->start, lem);
-
-		the_ants(lem);
+	the_ants_go_marching(lem);
 	free(lem);
 	return (0);
 }

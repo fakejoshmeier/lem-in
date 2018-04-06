@@ -34,7 +34,7 @@ int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
 {
 	float	dist;
 
-	dist = flag == true ? distance(curr, next) : 1;
+	dist = (flag == true) ? distance(curr, next) : 1;
 	if (next->start)
 		return (0);
 	if (!next->path)

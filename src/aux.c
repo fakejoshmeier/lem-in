@@ -44,20 +44,6 @@ int		allnum(char *str)
 ** This function is based on the Babylonian method.
 */
 
-double	sqroot(double square)
-{
-	double	root;
-	int		i;
-
-	root = square / 3;
-	i = -1;
-	if (square <= 0)
-		return (0);
-	while (++i < 32)
-		root = (root + square / root) / 2;
-	return (root);
-}
-
 double	distance(t_node *a, t_node *b)
 {
 	double	x;
@@ -65,5 +51,10 @@ double	distance(t_node *a, t_node *b)
 
 	x = (a->row - b->row);
 	y = (a->col - b->col);
-	return (sqroot((x * x) + (y * y)));
+	return (ft_sqroot((x * x) + (y * y)));
+}
+
+void	insert_val(int insert, int val)
+{
+	insert = val;
 }
