@@ -79,13 +79,13 @@ void	add_room(char **stuff, t_lemin *lem)
 	{
 		lem->start = node;
 		lem->s_flag = 2;
-		node->start = true;
+		node->start = 1;
 		node->weight = 0;
 	}
 	if (lem->e_flag == 1)
 	{
 		lem->end = node;
-		node->end = true;
+		node->end = 1;
 		lem->e_flag = 2;
 	}
 	affix_room(lem, node, lem->node_amt);

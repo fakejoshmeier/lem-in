@@ -33,18 +33,23 @@
 int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
 {
 	float	dist;
+	float	weight;
 
-	dist = (flag == true) ? distance(curr, next) : 1;
 	if (next->start)
-		return (0);
-	if (!next->path)
 	{
-		next->weight = curr->weight + dist;
+		printf("%s %f\n", curr->name, next->weight);
+		return (0);
+	}
+	dist = (flag == true) ? distance(curr, next) : 1;
+	weight = curr->weight;
+	if (next->path && weight + dist < next->weight)
+	{
+		next->weight = weight + dist;
 		return (1);
 	}
-	if (next->path && curr->weight + dist < next->weight)
+	if (!next->path)
 	{
-		next->weight = curr->weight + dist;
+		next->weight = weight + dist;
 		return (1);
 	}
 	return (0);
@@ -52,10 +57,10 @@ int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
 
 void	dijkstra(int i, int step, t_node *node, t_lemin *lem)
 {
-	node->visit = true;
 	while (++i < node->arrowhead && step < 2)
 	{
-		if (step == 0)
+		node->visit = true;
+		if (!step)
 		{
 			if (youre_gonna_carry_that_weight(node, node->links[i], lem->dist))
 				node->links[i]->path = node;
@@ -70,10 +75,5 @@ void	dijkstra(int i, int step, t_node *node, t_lemin *lem)
 			++step;
 			i = -1;
 		}
-	}
-	if (!lem->end->path)
-	{
-		free(lem);
-		ft_error("No path between start and end found.");
 	}
 }

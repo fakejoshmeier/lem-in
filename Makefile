@@ -19,7 +19,7 @@ HEADERS = inc/*.h
 
 all: $(NAME)
 
-$(NAME): $(O_SRC) $(LIB_SRC)
+$(NAME): $(LIB_SRC) $(O_SRC)
 	@/bin/echo -n "無駄"
 	@gcc -Wall -Werror -Wextra $^ -o $(NAME)
 	@/bin/echo -n "ァァ！」"

@@ -28,8 +28,8 @@ typedef struct		s_node
 {
 	char			*name;
 	bool			visit;
-	bool			start;
-	bool			end;
+	int				start;
+	int				end;
 	int				arrowhead;
 	int				ant_in_node;
 	double			weight;
@@ -70,6 +70,7 @@ typedef struct		s_lemin
 
 int					main(int ac, char *av[]);
 void				ft_error(char *str);
+void				flag_check(int ac, char *av[], t_lemin *lem);
 
 /*
 ** parse.c
@@ -85,6 +86,7 @@ void				comments(char *str);
 ** dijkstra.c
 */
 
+void				horseshit(t_lemin *lem);
 void				dijkstra(int i, int step, t_node *node, t_lemin *lem);
 int					youre_gonna_carry_that_weight(t_node *curr, t_node *next, \
 					bool flag);

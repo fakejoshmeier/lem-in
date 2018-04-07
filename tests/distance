@@ -1,0 +1,15 @@
+69
+#nice
+##start
+sutaato 0 0
+node1 0 1
+node2 0 2
+nodefar 45 3
+##end
+endo 0 3
+sutaato-node1
+node1-node2
+node2-endo
+sutaato-nodefar
+nodefar-endo
+#69? Nice nice nice

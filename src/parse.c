@@ -29,6 +29,7 @@ int		ants(t_lemin *lem, char *str)
 	if (!ft_atoi(str))
 		ft_error("Must have at least 1 ant.  Otherwise, what's the point?");
 	lem->ants = ft_atoi(str);
+	lem->remain = lem->ants;
 	ft_putendl(str);
 	free(str);
 	return (1);
