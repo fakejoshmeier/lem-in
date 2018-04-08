@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:49:13 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/26 07:24:09 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/07 01:16:01 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,4 @@ double	distance(t_node *a, t_node *b)
 	x = (a->row - b->row);
 	y = (a->col - b->col);
 	return (ft_sqroot((x * x) + (y * y)));
-}
-
-void	insert_val(int insert, int val)
-{
-	insert = val;
 }

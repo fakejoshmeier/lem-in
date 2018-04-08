@@ -6,11 +6,12 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 23:58:58 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/26 07:24:11 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/07 22:47:01 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lemin.h>
+#define LINK "These two rooms are already linked."
 
 /*
 ** I watch WAAAAAAAAY too much Yu-Gi-Oh
@@ -35,7 +36,7 @@ void	saakitto_konbain(t_node *uke, t_node *seme, int size)
 	int		i;
 
 	i = -1;
-	if (!(tmp = (t_node **)ft_memalloc((sizeof(t_node *) * size + 1))))
+	if (!(tmp = (t_node **)ft_memalloc((sizeof(t_node*) * (size + 1)))))
 		ft_error("Failed to allocate memory!");
 	while (++i < size)
 		tmp[i] = uke->links[i];
@@ -54,14 +55,12 @@ void	maakaa_ni_setto(t_link *link, t_lemin *lem)
 	{
 		if (!(ft_strcmp(lem->nodes[i]->name, link->name0)))
 		{
-			!dup_checkrl(lem->nodes[i], link->name1) ? 0 : ft_error("These two \
-			rooms are already linked.");
+			!dup_checkrl(lem->nodes[i], link->name1) ? 0 : ft_error(LINK);
 			link->node0 = lem->nodes[i];
 		}
 		else if (!(ft_strcmp(lem->nodes[i]->name, link->name1)))
 		{
-			!dup_checkrl(lem->nodes[i], link->name0) ? 0 : ft_error("These two \
-			rooms are already linked.");
+			!dup_checkrl(lem->nodes[i], link->name0) ? 0 : ft_error(LINK);
 			link->node1 = lem->nodes[i];
 		}
 		if (link->node0 && link->node1)

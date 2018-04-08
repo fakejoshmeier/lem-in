@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 23:53:02 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/26 07:24:17 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/07 23:21:03 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int		rooms(t_lemin *lem, char *str)
 			free_lots(str, lem);
 			ft_error("Must provide valid rooms!");
 		}
-		if (!lem->start)
+		if (lem->s_flag != 2)
 		{
 			free_lots(str, lem);
 			ft_error("Starting room must follow ##start and must exist.");
 		}
-		if (!lem->end)
+		if (lem->e_flag != 2)
 		{
 			free_lots(str, lem);
 			ft_error("Ending room must follow ##end and must exist.");
@@ -84,6 +84,8 @@ void	begin_parse(t_lemin *lem, int pos)
 
 	while (get_next_line(0, &str))
 	{
+		if (!str)
+			ft_error("FUCK");
 		if (str[0] == '#' && str[1] != '#')
 		{
 			comments(str);
@@ -91,15 +93,11 @@ void	begin_parse(t_lemin *lem, int pos)
 		}
 		else if (pos == 0)
 		{
-			if (ants(lem, str))
-			{
-				pos += 1;
-				continue ;
-			}
+			ants(lem, str) ? (pos += 1) : 0;
+			continue ;
 		}
 		else if (pos == 1)
-			if (!rooms(lem, str))
-				pos += 1;
+			!rooms(lem, str) ? (pos += 1) : 0;
 		if (pos == 2)
 			links(lem, str);
 		free(str);

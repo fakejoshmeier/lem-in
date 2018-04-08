@@ -1,10 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/04/06 22:49:59 by jmeier            #+#    #+#              #
+#    Updated: 2018/04/07 21:07:31 by jmeier           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = lem-in
 
 FUNC = main ants rooms links parse dijkstra aux
 
 C_LOC = src/
 C_NAM = $(addsuffix .c, $(FUNC))
-C_SRC = $(addprefix $(C_LOC), $(C_NAM))
+C_SRC = $(addprefix $(C_LOC), $(C_NAM)
 
 O_LOC = obj/
 O_NAM = $(addsuffix .o, $(FUNC))
@@ -21,13 +33,13 @@ all: $(NAME)
 
 $(NAME): $(LIB_SRC) $(O_SRC)
 	@/bin/echo -n "無駄"
-	@gcc -Wall -Werror -Wextra $^ -o $(NAME)
+	@gcc -Wall -Werror -Wextra -g $^ -o $(NAME)
 	@/bin/echo -n "ァァ！」"
 	@echo "\nそして、時は動き出す。"
 
 $(O_LOC)%.o: $(C_LOC)%.c $(HEADERS)
 	@/bin/echo -n "無駄"
-	@gcc -Wall -Werror -Wextra $(H_LOC) -o $@ -c $<
+	@gcc -Wall -Werror -Wextra -g $(H_LOC) -o $@ -c $<
 	@/bin/echo -n "無駄"
 
 $(LIB_SRC): force

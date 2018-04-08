@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 18:59:53 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/29 11:17:25 by josh             ###   ########.fr       */
+/*   Updated: 2018/04/07 20:33:25 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int		youre_gonna_carry_that_weight(t_node *curr, t_node *next, bool flag)
 	float	weight;
 
 	if (next->start)
-	{
-		printf("%s %f\n", curr->name, next->weight);
 		return (0);
-	}
 	dist = (flag == true) ? distance(curr, next) : 1;
 	weight = curr->weight;
 	if (next->path && weight + dist < next->weight)
@@ -59,7 +56,7 @@ void	dijkstra(int i, int step, t_node *node, t_lemin *lem)
 {
 	while (++i < node->arrowhead && step < 2)
 	{
-		node->visit = true;
+		node->visit = 1;
 		if (!step)
 		{
 			if (youre_gonna_carry_that_weight(node, node->links[i], lem->dist))

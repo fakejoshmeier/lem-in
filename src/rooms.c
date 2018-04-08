@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:51:54 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/26 07:24:19 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/07 22:21:41 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void	command_parse(char *str, t_lemin *lem)
 void	dup_checkr(char *name, t_lemin *lem)
 {
 	int		i;
-	int		j;
 
 	i = -1;
-	j = lem->node_amt;
-	while (++i < j)
+	while (++i < lem->node_amt)
 	{
 		ft_strcmp(name, lem->nodes[i]->name) != 0 ? 0 :
 			ft_error("Two rooms with the same name?  Blasphemy!");
@@ -47,14 +45,13 @@ void	affix_room(t_lemin *lem, t_node *new_node, int node_amt)
 	i = -1;
 	if (node_amt == 0)
 	{
-		if (!(tmp = ft_memalloc(sizeof(t_node *))))
+		if (!(lem->nodes = (t_node**)ft_memalloc(sizeof(t_node *))))
 			ft_error("Unable to allocate memory!");
-		tmp[0] = new_node;
-		lem->nodes = tmp;
+		lem->nodes[0] = new_node;
 	}
 	else
 	{
-		if (!(tmp = ft_memalloc(sizeof(t_node *) * (node_amt + 1))))
+		if (!(tmp = (t_node**)ft_memalloc(sizeof(t_node *) * (node_amt + 1))))
 			ft_error("Unable to allocate memory!");
 		while (++i < node_amt)
 			tmp[i] = lem->nodes[i];

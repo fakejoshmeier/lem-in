@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 21:02:52 by jmeier            #+#    #+#             */
-/*   Updated: 2018/03/29 12:35:08 by josh             ###   ########.fr       */
+/*   Updated: 2018/04/07 22:25:22 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 typedef struct		s_node
 {
 	char			*name;
-	bool			visit;
+	int				visit;
 	int				start;
 	int				end;
 	int				arrowhead;
@@ -95,7 +95,7 @@ int					youre_gonna_carry_that_weight(t_node *curr, t_node *next, \
 ** ants.c
 */
 
-void				the_ants_go_marching(t_lemin *lem);
+void				the_ants_go_marching(t_lemin *lemin, int finished);
 void				one_small_step_for_an_ant(int finished, t_node *second, \
 					t_lemin *lem);
 
