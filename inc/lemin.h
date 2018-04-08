@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 21:02:52 by jmeier            #+#    #+#             */
-/*   Updated: 2018/04/07 22:25:22 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/08 14:09:13 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct		s_lemin
 	struct s_node	*end;
 	struct s_node	**nodes;
 }					t_lemin;
-
 
 int					main(int ac, char *av[]);
 void				ft_error(char *str);
