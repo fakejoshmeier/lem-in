@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 23:53:02 by jmeier            #+#    #+#             */
-/*   Updated: 2018/04/07 23:21:03 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/08 12:42:46 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	begin_parse(t_lemin *lem, int pos)
 
 	while (get_next_line(0, &str))
 	{
-		if (!str)
-			ft_error("FUCK");
 		if (str[0] == '#' && str[1] != '#')
 		{
 			comments(str);
@@ -102,5 +100,6 @@ void	begin_parse(t_lemin *lem, int pos)
 			links(lem, str);
 		free(str);
 	}
+	(!lem->ants && !lem->nodes) ? ft_error("Empty file") : 0;
 	write(1, "\n", 1);
 }

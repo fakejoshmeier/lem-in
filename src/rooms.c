@@ -6,7 +6,7 @@
 /*   By: jmeier <jmeier@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 19:51:54 by jmeier            #+#    #+#             */
-/*   Updated: 2018/04/07 22:21:41 by jmeier           ###   ########.fr       */
+/*   Updated: 2018/04/08 13:23:05 by jmeier           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int		room_check(char *str, t_lemin *lem)
 	tmp = ft_strsplit(str, ' ');
 	if (!allnum(tmp[1]) || !allnum(tmp[2]))
 		ft_error("Given coordinates must be numerals.");
+	if (tmp[0][0] == "L")
+		ft_error("Rooms cannot begin with the letter \"L\".");
 	dup_checkr(tmp[0], lem);
 	add_room(tmp, lem);
 	ft_freearr(tmp);
